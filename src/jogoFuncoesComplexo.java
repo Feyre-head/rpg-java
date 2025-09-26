@@ -2,13 +2,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class jogoFuncoesComplexo {
+    static int pocao = 2;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
 
         int vidaHeroi = 60;
         int vidaMonstro = 50;
-        int pocao = 2;
         int xp = 0;
         boolean especialDisponivel = true;
 
@@ -22,7 +23,7 @@ public class jogoFuncoesComplexo {
         System.out.println("Ajude Taffeson a derrotar o monstro para salvar o vilarejo.\n");
 
         while (vidaHeroi > 0 && vidaMonstro > 0) {
-            System.out.println("\n❤️ Vida de Taffeson: " + vidaHeroi + " | 🐉 Vida do Monstro: " + vidaMonstro);
+            System.out.println("\n ❤️ Vida de Taffeson: " + vidaHeroi + " | 🐉 Vida do Monstro: " + vidaMonstro);
             System.out.println("🎒 Poções restantes: " + pocao);
             System.out.println("Escolha sua ação:");
             System.out.println("1 - Atacar");
@@ -30,6 +31,7 @@ public class jogoFuncoesComplexo {
             System.out.println("3 - Defender");
             System.out.println("4 - Poder Especial");
             System.out.println("5 - Fugir");
+            System.out.println("O que deseja fazer? ->  ");
 
             int escolha = sc.nextInt();
 
@@ -37,15 +39,13 @@ public class jogoFuncoesComplexo {
                 // TODO: chamar a função atacar()
                 // Essa função deve:
                 // 1. Gerar um número aleatório entre 8 e 12 para o dano.
-
                 // 2. Ter 20% de chance de ataque crítico (dano dobrado).
                 // 3. Mostrar mensagens no console ("Taffeson atacou...", "Crítico!" etc).
                 // 4. Retornar a nova vida do monstro após o ataque.
                 // vidaMonstro = atacar(vidaMonstro, rand);
             } else if (escolha == 2) {
 
-                usarPocao(pocao, vidaHeroi);
-                pocao--;
+                vidaHeroi = usarPocao(vidaHeroi);
 
             } else if (escolha == 3) {
                 // TODO: chamar a função defender()
@@ -113,22 +113,22 @@ public class jogoFuncoesComplexo {
 
     // public static int poderEspecial(int vidaMonstro) { ... }
 
-    public static int usarPocao(int pocao, int vidaHeroi) {
+    public static int usarPocao(int vidaHeroi) {
         if (pocao > 0) {
-
             vidaHeroi += 15;
-            System.out.println("Você usou uma poção");
-            System.out.println("Vida Atual:" + vidaHeroi);
-        } else {
-            System.out.println("Você não tem mais poções");
+            pocao--;
+            System.out.println("\uD83C\uDF75 Você usou uma poção! +15 ");
+            System.out.println("❤️ Vida Atual:" + vidaHeroi);
+        }
+        if (pocao == 0) {
+            System.out.println("❌ Você não tem mais Poções! \uD83C\uDF75");
         }
         return vidaHeroi;
     }
 
-    public static void fugir(){
-        System.out.println("Taffeson fugiu da batalha");
+    public static void fugir() {
+        System.out.println("\uD83D\uDCA8 Taffeson fugiu da batalha");
 
     }
+
 }
-
-
