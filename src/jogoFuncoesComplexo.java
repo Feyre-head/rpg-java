@@ -36,13 +36,8 @@ public class jogoFuncoesComplexo {
             int escolha = sc.nextInt();
 
             if (escolha == 1) {
-                // TODO: chamar a função atacar()
-                // Essa função deve:
-                // 1. Gerar um número aleatório entre 8 e 12 para o dano.
-                // 2. Ter 20% de chance de ataque crítico (dano dobrado).
-                // 3. Mostrar mensagens no console ("Taffeson atacou...", "Crítico!" etc).
-                // 4. Retornar a nova vida do monstro após o ataque.
-                // vidaMonstro = atacar(vidaMonstro, rand);
+                vidaMonstro = atacar(vidaMonstro, rand);
+
             } else if (escolha == 2) {
 
                 vidaHeroi = usarPocao(vidaHeroi);
@@ -104,14 +99,32 @@ public class jogoFuncoesComplexo {
     }
 
     // =============================
-    // Funções DEVEM implementar, como exemplo
+    //        Funções/Métodos
     // =============================
 
-    // public static int atacar(int vidaMonstro, Random rand) { ... }
+    public static int atacar(int vidaMonstro, Random rand) {
 
-    // public static void defender() { ... }
+        int ataqueHeroi = rand.nextInt(4) + 8;
+        boolean critico = rand.nextInt(100) < 20; // 20% de chance crítico
 
-    // public static int poderEspecial(int vidaMonstro) { ... }
+        if (critico) {
+            ataqueHeroi *= 2;
+            System.out.println("💥 Taffeson atacou!  'Crítico!'");
+            System.out.println(" Taffeson Causou " + ataqueHeroi + " de dano!");
+        } else {
+            System.out.println("💥 Taffeson atacou! e causou " + ataqueHeroi + " de dano!");
+        }
+
+        vidaMonstro -= ataqueHeroi;
+        return vidaMonstro;
+
+
+        // 2. Ter 20% de chance de ataque crítico (dano dobrado).
+        // 3. Mostrar mensagens no console ("Taffeson atacou...", "Crítico!" etc).
+        // 4. Retornar a nova vida do monstro após o ataque.
+        //
+    }
+
 
     public static int usarPocao(int vidaHeroi) {
         if (pocao > 0) {
@@ -125,7 +138,12 @@ public class jogoFuncoesComplexo {
         }
         return vidaHeroi;
     }
+    // public static void defender() { ... }
 
+    // public static int poderEspecial(int vidaMonstro) { ... }
+
+
+    //FUGIR
     public static void fugir() {
         System.out.println("\uD83D\uDCA8 Taffeson fugiu da batalha");
 
