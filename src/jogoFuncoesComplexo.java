@@ -3,17 +3,16 @@ import java.util.Scanner;
 
 public class jogoFuncoesComplexo {
     static int pocao = 2;
+    static int vidaHeroi = 60;
+    static int vidaMonstro = 50;
     static boolean defesa = false;
     static boolean poderEspecial = true;
-    static boolean fugir = false;
+    static int xp = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random rand = new Random();
 
-        int vidaHeroi = 60;
-        int vidaMonstro = 50;
-        int xp = 0;
 
         // História inicial
         System.out.println("Era uma vez em um reino distante...");
@@ -36,6 +35,7 @@ public class jogoFuncoesComplexo {
                     5 - Fugir
                     O que deseja fazer? ->
                     """);
+
 
             int escolha = sc.nextInt();
 
@@ -71,19 +71,11 @@ public class jogoFuncoesComplexo {
         }
 
         if (vidaMonstro <= 0) {
-            // TODO: chamar a função
-            // Essa função deve:
-            // 1. Gerar um número aleatório entre 10 e 30.
-            // 2. Retornar esse valor como experiência (XP).
-            // 3. Mostrar mensagem de vitória com o XP ganho.
-            // xp = ganharXP();
-            System.out.println("🎉 Taffeson derrotou o monstro e ganhou " + xp + " XP!");
-            System.out.println("🏆 O vilarejo foi salvo graças à bravura de Taffeson!");
-        } else {
-            System.out.println("💀 Taffeson foi derrotado... o vilarejo está em perigo!");
+
+            xp = ganharXP(xp, );
+
         }
     }
-
     // =============================
     //        Funções/Métodos
     // =============================
@@ -165,7 +157,40 @@ public class jogoFuncoesComplexo {
     }
 
     //GANHO XP
-    public static int ganharXP() {
+    public static int ganharXP(int opcao, int xp, Random rand) {
+        int heroico = 100;
+        int veterano = 50;
+        int aventureiro = rand.nextInt(10, 30);
+
+        if (vidaMonstro == 0) {
+
+            //Aventureiro Explorador das Terras Selvagens xp aleatório entre 10 e 30
+            System.out.println("🎉 Taffeson derrotou o monstro e ganhou " + xp + " XP!");
+            System.out.println("🏆 O vilarejo foi salvo graças à bravura de Taffeson!");
+            xp = aventureiro;
+
+        } else if (opcao != 2 && opcao != 3 && opcao != 4) {
+            //heroico !2 !3 !4   xp 100
+            System.out.println("""
+                    
+                    TAFFERSON derrotou o monstro no MODO HEROICO e recebeu O Título:
+                     "Campeão das Lendas Eternas" 
+                    """);
+            xp = 100;
+        } else if (opcao != 2 && opcao != 3) {
+            //Veterano !2 !3   Guardião das Batalhas Passadas xp 50
+            System.out.println("""
+                    TAFFERSON derrotou o monstro no MODO VETERANO e recebeu O Título:
+                     "Guardião das Batalhas Passadas" 
+                    """);
+            xp = 50;
+
+        } else {
+            System.out.println("💀 Taffeson foi derrotado... o vilarejo está em perigo!");
+        }
+
+
+        return xp;
 
     }
 
