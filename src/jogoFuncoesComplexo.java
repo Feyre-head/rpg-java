@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class jogoFuncoesComplexo {
     static int pocao = 2;
+    static boolean defesa = false;
+    static boolean poderEspecial = true;
+    static boolean fugir = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -11,7 +14,6 @@ public class jogoFuncoesComplexo {
         int vidaHeroi = 60;
         int vidaMonstro = 50;
         int xp = 0;
-        boolean especialDisponivel = true;
 
         // História inicial
         System.out.println("Era uma vez em um reino distante...");
@@ -25,13 +27,15 @@ public class jogoFuncoesComplexo {
         while (vidaHeroi > 0 && vidaMonstro > 0) {
             System.out.println("\n ❤️ Vida de Taffeson: " + vidaHeroi + " | 🐉 Vida do Monstro: " + vidaMonstro);
             System.out.println("🎒 Poções restantes: " + pocao);
-            System.out.println("Escolha sua ação:");
-            System.out.println("1 - Atacar");
-            System.out.println("2 - Usar Poção");
-            System.out.println("3 - Defender");
-            System.out.println("4 - Poder Especial");
-            System.out.println("5 - Fugir");
-            System.out.println("O que deseja fazer? ->  ");
+            System.out.println("""
+                    Escolha sua ação:
+                    1 - Atacar
+                    2 - Usar Poção
+                    3 - Defender
+                    4 - Poder Especial
+                    5 - Fugir
+                    O que deseja fazer? ->
+                    """);
 
             int escolha = sc.nextInt();
 
@@ -43,45 +47,26 @@ public class jogoFuncoesComplexo {
                 vidaHeroi = usarPocao(vidaHeroi);
 
             } else if (escolha == 3) {
-                // TODO: chamar a função defender()
-                // Essa função deve:
-                // 1. Apenas imprimir uma mensagem avisando que Taffeson está defendendo.
-                // 2. Reduzir dano em 50%.
-                // defender();
+
+                defender();
+
             } else if (escolha == 4) {
-                // TODO: chamar a função poderEspecial()
-                // Essa função deve:
-                // 1. Só poder ser usada UMA vez no jogo.
-                // 2. Causar 25 de dano fixo no monstro.
-                // 3. Mostrar mensagens ("Taffeson usou o poder especial!").
-                // if (especialDisponivel) {
-                //     vidaMonstro = poderEspecial(vidaMonstro);
-                //     especialDisponivel = false;
-                // } else {
-                //     System.out.println("❌ O poder especial já foi usado!");
-                // }
+
+                vidaMonstro = poderEspecial(vidaMonstro);
+
             } else if (escolha == 5) {
-                // TODO: chamar a função fugir()
-                // Essa função deve:
-                // 1. Mostrar mensagem de que Taffeson fugiu da batalha.
-                // 2. Encerrar o jogo imediatamente.
-                // fugir();
-                return;
+
+                fugir();
+                break;
+
             } else {
                 System.out.println("Opção inválida!");
                 continue;
             }
 
             // Turno do monstro
-            //TODO leve essa logica para uma função chamada Ataque de Mostro()
-            int ataqueMonstro = rand.nextInt(10) + 5; // dano entre 5 e 15
-            boolean critico = rand.nextInt(100) < 15; // 15% de chance crítico
-            if (critico) {
-                ataqueMonstro *= 2;
-                System.out.println("💥 O monstro acertou um CRÍTICO!");
-            }
-            vidaHeroi -= ataqueMonstro;
-            System.out.println("🐉 O monstro atacou e causou " + ataqueMonstro + " de dano!");
+            monstro(vidaHeroi, rand);
+
         }
 
         if (vidaMonstro <= 0) {
@@ -102,6 +87,7 @@ public class jogoFuncoesComplexo {
     //        Funções/Métodos
     // =============================
 
+    //ATACAR
     public static int atacar(int vidaMonstro, Random rand) {
 
         int ataqueHeroi = rand.nextInt(4) + 8;
@@ -117,15 +103,9 @@ public class jogoFuncoesComplexo {
 
         vidaMonstro -= ataqueHeroi;
         return vidaMonstro;
-
-
-        // 2. Ter 20% de chance de ataque crítico (dano dobrado).
-        // 3. Mostrar mensagens no console ("Taffeson atacou...", "Crítico!" etc).
-        // 4. Retornar a nova vida do monstro após o ataque.
-        //
     }
 
-
+    //USAR POÇÃO
     public static int usarPocao(int vidaHeroi) {
         if (pocao > 0) {
             vidaHeroi += 15;
@@ -138,15 +118,49 @@ public class jogoFuncoesComplexo {
         }
         return vidaHeroi;
     }
-    // public static void defender() { ... }
 
-    // public static int poderEspecial(int vidaMonstro) { ... }
+    //DEFENDER
+    public static void defender() {
+        defesa = true;
+        System.out.println("Tafferson defendeu");
+    }
+
+    //ESPECIAL
+    public static int poderEspecial(int vidaMonstro) {
+        int especial = 25;
+        if (poderEspecial) {
+            vidaMonstro -= 25;
+            System.out.println("Tafferson usou o poder especial!");
+            poderEspecial = false;
+        } else {
+            System.out.println("❌ O poder especial já foi usado!");
+        }
+        return vidaMonstro;
+    }
 
 
     //FUGIR
     public static void fugir() {
-        System.out.println("\uD83D\uDCA8 Taffeson fugiu da batalha");
 
+        System.out.println("\uD83D\uDCA8 Taffeson fugiu da batalha!");
+
+    }
+
+    //TURNO MONSTRO
+    public static int monstro(int vidaHeroi, Random rand) {
+        int ataqueMonstro = rand.nextInt(10) + 5; // dano entre 5 e 15
+        boolean critico = rand.nextInt(100) < 15; // 15% de chance crítico
+        if (critico) {
+            ataqueMonstro *= 2;
+            System.out.println("💥 O monstro acertou um CRÍTICO!");
+        }
+        if (defesa) {
+            ataqueMonstro = ataqueMonstro / 2;
+            System.out.println("O Dano sofrido foi reduzido pela metade.");
+        }
+        vidaHeroi -= ataqueMonstro;
+        System.out.println("🐉 O monstro atacou e causou " + ataqueMonstro + " de dano!");
+        return vidaHeroi;
     }
 
 }
