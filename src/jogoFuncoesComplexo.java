@@ -24,7 +24,7 @@ public class jogoFuncoesComplexo {
         // =============================
         System.out.println("\uD83D\uDCD6 Era uma vez em um reino distante...");
         System.out.println("\uD83D\uDC66 Um jovem herói chamado Taffeson foi escolhido para enfrentar um terrível monstro.");
-        System.out.println("⚔\uFE0F O destino do vilarejo depende de sua coragem e de suas escolhas!");
+        System.out.println("⚔️ O destino do vilarejo depende de sua coragem e de suas escolhas!");
         System.out.println("Prepare-se para a batalha! \n");
 
         System.out.println("\uD83C\uDFF0 Bem-vindo ao RPG das Funções!");
