@@ -98,7 +98,7 @@ public class jogoFuncoesComplexo {
 
         if (critico) {
             ataqueHeroi *= 2;
-            System.out.println("⚔️ \uD83D\uDCA5 CRÍTICO! Taffeson causou " + ataqueHeroi + " de dano!");
+            System.out.println("⚔️💥 CRÍTICO! Taffeson causou " + ataqueHeroi + " de dano!");
         } else {
             System.out.println("⚔️ Taffeson atacou e causou " + ataqueHeroi + " de dano!");
         }
@@ -111,11 +111,11 @@ public class jogoFuncoesComplexo {
         if (pocao > 0) {
             vidaHeroi += 15;
             pocao--;
-            System.out.println("\uD83C\uDF75 Você usou uma poção! +15 ");
+            System.out.println("🧪 Você usou uma poção! +15 ❤️");
             System.out.println("❤️ Vida Atual:" + vidaHeroi);
         }
         if (pocao == 0) {
-            System.out.println("❌ Você não tem mais Poções! \uD83C\uDF75");
+            System.out.println("❌ Você não tem mais poções! 🧪");
         }
         return vidaHeroi;
     }
@@ -123,7 +123,8 @@ public class jogoFuncoesComplexo {
     // 🛡️ DEFENDER
     public static void defender() {
         defesa = true;
-        System.out.println("Tafferson defendeu");
+        System.out.println("🛡️ Taffeson está em posição defensiva!");
+        System.out.println("Dano recebido, reduzido pela metade!");
     }
 
     // ✨ PODER ESPECIAL
@@ -131,7 +132,7 @@ public class jogoFuncoesComplexo {
         int especial = 25;
         if (poderEspecial) {
             vidaMonstro -= 25;
-            System.out.println("✨🔥 Taffeson usou seu PODER ESPECIAL e causou 25 de dano!");
+            System.out.println("✨🔥 Taffeson usou seu PODER ESPECIAL e causou " + especial + " de dano!");
             poderEspecial = false;
         } else {
             System.out.println("❌ O poder especial já foi usado!");
