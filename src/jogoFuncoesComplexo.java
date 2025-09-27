@@ -60,17 +60,18 @@ public class jogoFuncoesComplexo {
                 break;
 
             } else {
+
                 System.out.println("Opção inválida!");
                 continue;
             }
 
             // Turno do monstro
-            monstro(vidaHeroi, rand);
+            vidaHeroi = monstro(vidaHeroi, rand);
 
         }
 
         if (vidaMonstro <= 0) {
-            // TODO: chamar a função ganharXP()
+            // TODO: chamar a função
             // Essa função deve:
             // 1. Gerar um número aleatório entre 10 e 30.
             // 2. Retornar esse valor como experiência (XP).
@@ -161,6 +162,11 @@ public class jogoFuncoesComplexo {
         vidaHeroi -= ataqueMonstro;
         System.out.println("🐉 O monstro atacou e causou " + ataqueMonstro + " de dano!");
         return vidaHeroi;
+    }
+
+    //GANHO XP
+    public static int ganharXP() {
+
     }
 
 }
